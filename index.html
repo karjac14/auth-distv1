@@ -1,65 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flybuys Login</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;500&display=swap" rel="stylesheet">
-    <link href="/index.61d3354a.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/gh/karjac14/auth-distv1/index.85444beb.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.auth0.com/js/guardian-js/1.3.0/guardian-js.js"></script>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
-    <script>if (window.location.pathname.includes("/lo/reset")) try {
-    window.prConfig = {
-        _csrf: "{{csrf_token}}",
-        ticket: "{{ticket}}",
-        email: "{{email}}"
-    };
-} catch (error) {
-    window.prConfig = null;
-}
-else if (window.location.pathname.includes("/mf")) try {
-    window.mfConfig = {
-        serviceUrl: "{{ mfaServerUrl }}",
-        ticket: "{{ ticket }}",
-        requestToken: "{{ requestToken }}",
-        issuer: {
-            label: "{{ userData.friendlyUserId }}",
-            name: "{{ userData.tenant }}"
-        },
-        globalTrackingId: "{{ globalTrackingId }}",
-        stateCheckingMechanism: "{{ stateCheckingMechanism }}"
-    };
-    //TODO: remove below and initiate npm package auth0-guardian-js @auth0/auth0-spa-js window.mfConfig
-    var guardianjs = auth0GuardianJS({
-        serviceUrl: "{{ mfaServerUrl }}",
-        ticket: "{{ ticket }}",
-        requestToken: "{{ requestToken }}",
-        issuer: {
-            label: "{{ userData.friendlyUserId }}",
-            name: "{{ userData.tenant }}"
-        },
-        globalTrackingId: "{{ globalTrackingId }}",
-        stateCheckingMechanism: "{{ stateCheckingMechanism }}"
-    });
-} catch (error1) {
-    window.mfConfig = null;
-}
-else try {
-    window.auth0Config = JSON.parse(decodeURIComponent(escape(window.atob("@@config@@"))));
-    if (!window.auth0Config.connection) // TODO: remove this hardocde value
-    window.auth0Config.connection = "Username-Password-Authentication";
-} catch (error2) {
-    window.auth0Config = {
-        error: error2
-    };
-}
-
-</script>
+    <script>
+      if (window.location.pathname.includes("/lo/reset"))
+        try {
+          window.prConfig = {
+            _csrf: "{{csrf_token}}",
+            ticket: "{{ticket}}",
+            email: "{{email}}",
+          };
+        } catch (e) {
+          window.prConfig = null;
+        }
+      else if (window.location.pathname.includes("/mf"))
+        try {
+          window.mfConfig = {
+            serviceUrl: "{{ mfaServerUrl }}",
+            ticket: "{{ ticket }}",
+            requestToken: "{{ requestToken }}",
+            issuer: {
+              label: "{{ userData.friendlyUserId }}",
+              name: "{{ userData.tenant }}",
+            },
+            globalTrackingId: "{{ globalTrackingId }}",
+            stateCheckingMechanism: "{{ stateCheckingMechanism }}",
+          };
+          var guardianjs = auth0GuardianJS({
+            serviceUrl: "{{ mfaServerUrl }}",
+            ticket: "{{ ticket }}",
+            requestToken: "{{ requestToken }}",
+            issuer: {
+              label: "{{ userData.friendlyUserId }}",
+              name: "{{ userData.tenant }}",
+            },
+            globalTrackingId: "{{ globalTrackingId }}",
+            stateCheckingMechanism: "{{ stateCheckingMechanism }}",
+          });
+        } catch (e) {
+          window.mfConfig = null;
+        }
+      else
+        try {
+          (window.auth0Config = JSON.parse(
+            decodeURIComponent(escape(window.atob("@@config@@")))
+          )),
+            window.auth0Config.connection ||
+              (window.auth0Config.connection =
+                "Username-Password-Authentication");
+        } catch (e) {
+          window.auth0Config = { error: e };
+        }
+    </script>
   </head>
   <body>
     <div id="app"></div>
-    <script src="/index.975ef6c8.js" defer=""></script>
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/gh/karjac14/auth-distv1/index.dfef7857.js"
+    ></script>
   </body>
 </html>
